@@ -1,0 +1,509 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>upower_dbus</h1>
+
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Tables">Tables</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><strong>upower_dbus</strong></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="topics/README.md.html">README</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>upower_dbus</code></h1>
+<p>Get information about your power devices using
+  <a href="https://upower.freedesktop.org/">UPower</a> and DBus.</p>
+<p>
+
+
+<p>  Requiring this module will return the UPower Manager singleton.</p>
+
+<p>  Example:</p>
+
+
+<pre>
+<span class="keyword">local</span> upower = <span class="global">require</span>(<span class="string">"upower_dbus"</span>)
+upower.Manager:init()
+<span class="comment">-- What version of UPower is in use?
+</span>upower.Manager.DaemonVersion
+<span class="comment">-- Are we using a battery?
+</span>upower.Manager.OnBattery
+<span class="comment">-- Print all fields of the first device found
+</span><span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="global">pairs</span>(upower.Manager.devices[<span class="number">1</span>]) <span class="keyword">do</span> <span class="global">print</span>(k, v) <span class="keyword">end</span>
+<span class="comment">-- Enumerate the Device Types known by UPower
+</span><span class="keyword">for</span> _, v <span class="keyword">in</span> <span class="global">ipairs</span>(upower.enums.DeviceTypes) <span class="keyword">do</span> <span class="global">print</span>(v) <span class="keyword">end</span>
+<span class="comment">-- Say that the first device is a battery
+</span>battery = upower.Manager.devices[<span class="number">1</span>]
+<span class="global">print</span>(battery.Percentage) <span class="comment">-- may print 100.0
+</span><span class="comment">-- Update the devices in case something changed
+</span>upower.Manager:update_devices()
+<span class="comment">-- The battery discharged a bit
+</span>battery.Percentage <span class="comment">-- may print 99.0</span>
+</pre>
+
+</p>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>Copyright</strong>: 2016 Stefano Mazzucco</li>
+        <li><strong>License</strong>: Apache License, version 2.0</li>
+        <li><strong>Author</strong>: Stefano Mazzucco <stefano AT curso DOT re></li>
+    </ul>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#upower.Device:update_mappings">upower.Device:update_mappings ()</a></td>
+	<td class="summary">Update the device mappings.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#upower.Device:update_properties">upower.Device:update_properties ()</a></td>
+	<td class="summary">Update the Device properties by calling DBus</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#upower.Device:refresh">upower.Device:refresh ()</a></td>
+	<td class="summary">Refresh the Device status (and update its properties)
+ Interrogate the Device calling the DBus method "Refresh"</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#upower.Device:new">upower.Device:new (path)</a></td>
+	<td class="summary">Create a new Device</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#upower.Manager:update_devices">upower.Manager:update_devices ()</a></td>
+	<td class="summary">Update the UPower Devices
+ Call the DBus method <code>EnumerateDevices</code> and update
+ <code>self.devices</code></td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#upower.Manager:update_properties">upower.Manager:update_properties ()</a></td>
+	<td class="summary">Update the Manager's properties</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#upower.Manager:init">upower.Manager:init ()</a></td>
+	<td class="summary">Initialize the Manager singleton</td>
+	</tr>
+</table>
+<h2><a href="#Tables">Tables</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#upower.enums.DeviceTypes">upower.enums.DeviceTypes</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#upower.enums.BatteryStates">upower.enums.BatteryStates</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#upower.enums.BatteryTechnologies">upower.enums.BatteryTechnologies</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#upower.enums.BatteryWarningLevels">upower.enums.BatteryWarningLevels</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "upower.Device:update_mappings"></a>
+    <strong>upower.Device:update_mappings ()</strong>
+    </dt>
+    <dd>
+    Update the device mappings.
+ Unless you are sure that the properties of the Device
+ have changed, you may want to use <a href="index.html#upower.Manager:update_properties">update_properties</a>
+ or <a href="index.html#upower.Device:refresh">refresh</a> instead.
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="index.html#upower.Device:update_properties">upower.Device:update_properties</a></li>
+         <li><a href="index.html#upower.Device:refresh">upower.Device:refresh</a></li>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "upower.Device:update_properties"></a>
+    <strong>upower.Device:update_properties ()</strong>
+    </dt>
+    <dd>
+    Update the Device properties by calling DBus
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "upower.Device:refresh"></a>
+    <strong>upower.Device:refresh ()</strong>
+    </dt>
+    <dd>
+    Refresh the Device status (and update its properties)
+ Interrogate the Device calling the DBus method "Refresh"
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "upower.Device:new"></a>
+    <strong>upower.Device:new (path)</strong>
+    </dt>
+    <dd>
+    Create a new Device
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">path</span>
+         The DBus object path for the device.
+ If unspecified the string <code>&quot;/invalid&quot;</code> will be used.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "upower.Manager:update_devices"></a>
+    <strong>upower.Manager:update_devices ()</strong>
+    </dt>
+    <dd>
+    Update the UPower Devices
+ Call the DBus method <code>EnumerateDevices</code> and update
+ <code>self.devices</code>
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "upower.Manager:update_properties"></a>
+    <strong>upower.Manager:update_properties ()</strong>
+    </dt>
+    <dd>
+    Update the Manager's properties
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "upower.Manager:init"></a>
+    <strong>upower.Manager:init ()</strong>
+    </dt>
+    <dd>
+    Initialize the Manager singleton
+
+
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Tables"></a>Tables</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "upower.enums.DeviceTypes"></a>
+    <strong>upower.enums.DeviceTypes</strong>
+    </dt>
+    <dd>
+
+
+
+
+
+    <h3>Fields:</h3>
+    <ul>
+        <li><span class="parameter">Unknown</span>
+
+
+
+        </li>
+        <li><span class="parameter">Line Power</span>
+
+
+
+        </li>
+        <li><span class="parameter">Battery</span>
+
+
+
+        </li>
+        <li><span class="parameter">Ups</span>
+
+
+
+        </li>
+        <li><span class="parameter">Monitor</span>
+
+
+
+        </li>
+        <li><span class="parameter">Mouse</span>
+
+
+
+        </li>
+        <li><span class="parameter">Keyboard</span>
+
+
+
+        </li>
+        <li><span class="parameter">Pda</span>
+
+
+
+        </li>
+        <li><span class="parameter">Phone</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "upower.enums.BatteryStates"></a>
+    <strong>upower.enums.BatteryStates</strong>
+    </dt>
+    <dd>
+
+
+
+
+
+    <h3>Fields:</h3>
+    <ul>
+        <li><span class="parameter">Unknown</span>
+
+
+
+        </li>
+        <li><span class="parameter">Charging</span>
+
+
+
+        </li>
+        <li><span class="parameter">Discharging</span>
+
+
+
+        </li>
+        <li><span class="parameter">Empty</span>
+
+
+
+        </li>
+        <li><span class="parameter">Fully charged</span>
+
+
+
+        </li>
+        <li><span class="parameter">Pending charge</span>
+
+
+
+        </li>
+        <li><span class="parameter">Pending discharge</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "upower.enums.BatteryTechnologies"></a>
+    <strong>upower.enums.BatteryTechnologies</strong>
+    </dt>
+    <dd>
+
+
+
+
+
+    <h3>Fields:</h3>
+    <ul>
+        <li><span class="parameter">Unknown</span>
+
+
+
+        </li>
+        <li><span class="parameter">Lithium ion</span>
+
+
+
+        </li>
+        <li><span class="parameter">Lithium polymer</span>
+
+
+
+        </li>
+        <li><span class="parameter">Lithium iron phosphate</span>
+
+
+
+        </li>
+        <li><span class="parameter">Lead acid</span>
+
+
+
+        </li>
+        <li><span class="parameter">Nickel cadmium</span>
+
+
+
+        </li>
+        <li><span class="parameter">Nickel metal hydride</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "upower.enums.BatteryWarningLevels"></a>
+    <strong>upower.enums.BatteryWarningLevels</strong>
+    </dt>
+    <dd>
+
+
+
+
+
+    <h3>Fields:</h3>
+    <ul>
+        <li><span class="parameter">Unknown</span>
+
+
+
+        </li>
+        <li><span class="parameter">None</span>
+
+
+
+        </li>
+        <li><span class="parameter">Discharging</span>
+        (only for UPSes)
+        </li>
+        <li><span class="parameter">Low</span>
+
+
+
+        </li>
+        <li><span class="parameter">Critical</span>
+
+
+
+        </li>
+        <li><span class="parameter">Action</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.5</a></i>
+<i style="float:right;">Last updated 2016-11-07 22:27:57 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
