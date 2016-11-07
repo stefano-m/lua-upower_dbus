@@ -1,5 +1,5 @@
 package = "upower_dbus"
- version = "0.1.0-1"
+ version = "0.1.0-2"
  source = {
     url = "git://github.com/stefano-m/lua-upower_dbus",
     tag = "v0.1.0"
