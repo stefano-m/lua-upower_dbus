@@ -1,4 +1,6 @@
 project = "upower_dbus"
 format = "markdown"
 readme = "README.md"
-file = "upower_dbus.lua"
+file = "src/upower_dbus/init.lua"
+dir = "docs"
+no_lua_ref = true

@@ -39,6 +39,8 @@
       -- The battery discharged a bit
       battery.Percentage -- may print 99.0
 
+  @module upower_dbus
+
   @license Apache License, version 2.0
   @author Stefano Mazzucco <stefano AT curso DOT re>
   @copyright 2017 Stefano Mazzucco
