@@ -12,7 +12,8 @@ package = "upower_dbus"
  }
  dependencies = {
     "lua >= 5.1",
-    "dbus_proxy"
+    "dbus_proxy",
+    "enum"
  }
  supported_platforms = { "linux" }
  build = {

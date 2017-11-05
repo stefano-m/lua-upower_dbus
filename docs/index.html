@@ -29,8 +29,9 @@
 
 <h2>Contents</h2>
 <ul>
-<li><a href="#Functions">Functions</a></li>
-<li><a href="#Tables">Tables</a></li>
+<li><a href="#Enumerations">Enumerations</a></li>
+<li><a href="#Device">Device</a></li>
+<li><a href="#Manager">Manager</a></li>
 </ul>
 
 
@@ -86,38 +87,43 @@ upower = <span class="global">require</span>(<span class="string">"upower_dbus"<
     </ul>
 
 
-<h2><a href="#Functions">Functions</a></h2>
+<h2><a href="#Enumerations">Enumerations</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#upower.enums">upower.enums</a></td>
+	<td class="summary">UPower Enumerations.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DeviceType">DeviceType</a></td>
+	<td class="summary">The type of power source</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#BatteryState">BatteryState</a></td>
+	<td class="summary">The state of the battery.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#BatteryTechnology">BatteryTechnology</a></td>
+	<td class="summary">The technology used by the battery.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#BatteryWarningLevel">BatteryWarningLevel</a></td>
+	<td class="summary">The warning level of the battery.</td>
+	</tr>
+</table>
+<h2><a href="#Device">Device</a></h2>
 <table class="function_list">
 	<tr>
 	<td class="name" nowrap><a href="#upower.create_device">upower.create_device (path)</a></td>
-	<td class="summary">Create a new Device</td>
+	<td class="summary">Create a new <a href="https://upower.freedesktop.org/docs/Device.html">UPower
+  Device</a>.</td>
 	</tr>
 </table>
-<h2><a href="#Tables">Tables</a></h2>
+<h2><a href="#Manager">Manager</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#upower.enums.DeviceTypes">upower.enums.DeviceTypes</a></td>
-	<td class="summary">
-
-</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#upower.enums.BatteryStates">upower.enums.BatteryStates</a></td>
-	<td class="summary">
-
-</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#upower.enums.BatteryTechnologies">upower.enums.BatteryTechnologies</a></td>
-	<td class="summary">
-
-</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#upower.enums.BatteryWarningLevels">upower.enums.BatteryWarningLevels</a></td>
-	<td class="summary">
-
-</td>
+	<td class="name" nowrap><a href="#upower.Manager">upower.Manager</a></td>
+	<td class="summary">The UPower Manager that proxies the <a href="https://upower.freedesktop.org/docs/UPower.html">UPower DBus
+ interface</a>.</td>
 	</tr>
 </table>
 
@@ -125,41 +131,31 @@ upower = <span class="global">require</span>(<span class="string">"upower_dbus"<
 <br/>
 
 
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+    <h2 class="section-header "><a name="Enumerations"></a>Enumerations</h2>
 
     <dl class="function">
     <dt>
-    <a name = "upower.create_device"></a>
-    <strong>upower.create_device (path)</strong>
+    <a name = "upower.enums"></a>
+    <strong>upower.enums</strong>
     </dt>
     <dd>
-    Create a new Device
+    UPower Enumerations.
+ The <a href="index.html#upower.enums">upower.enums</a> table contains the below <a href="https://luarocks.org/modules/stefano-m/enum">Lua
+ Enumerations</a>.
 
 
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">path</span>
-         The DBus object path for the device.
-        </li>
-    </ul>
 
 
 
 
 
 </dd>
-</dl>
-    <h2 class="section-header "><a name="Tables"></a>Tables</h2>
-
-    <dl class="function">
     <dt>
-    <a name = "upower.enums.DeviceTypes"></a>
-    <strong>upower.enums.DeviceTypes</strong>
+    <a name = "DeviceType"></a>
+    <strong>DeviceType</strong>
     </dt>
     <dd>
-
-
-
+    The type of power source
 
 
     <h3>Fields:</h3>
@@ -217,13 +213,12 @@ upower = <span class="global">require</span>(<span class="string">"upower_dbus"<
 
 </dd>
     <dt>
-    <a name = "upower.enums.BatteryStates"></a>
-    <strong>upower.enums.BatteryStates</strong>
+    <a name = "BatteryState"></a>
+    <strong>BatteryState</strong>
     </dt>
     <dd>
-
-
-
+    The state of the battery.
+ This property is only valid if the device is a battery.
 
 
     <h3>Fields:</h3>
@@ -267,17 +262,20 @@ upower = <span class="global">require</span>(<span class="string">"upower_dbus"<
 
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="index.html#DeviceType">DeviceType</a>
+    </ul>
 
 
 </dd>
     <dt>
-    <a name = "upower.enums.BatteryTechnologies"></a>
-    <strong>upower.enums.BatteryTechnologies</strong>
+    <a name = "BatteryTechnology"></a>
+    <strong>BatteryTechnology</strong>
     </dt>
     <dd>
-
-
-
+    The technology used by the battery.
+ This property is only valid if the device is a battery.
 
 
     <h3>Fields:</h3>
@@ -321,17 +319,20 @@ upower = <span class="global">require</span>(<span class="string">"upower_dbus"<
 
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="index.html#DeviceType">DeviceType</a>
+    </ul>
 
 
 </dd>
     <dt>
-    <a name = "upower.enums.BatteryWarningLevels"></a>
-    <strong>upower.enums.BatteryWarningLevels</strong>
+    <a name = "BatteryWarningLevel"></a>
+    <strong>BatteryWarningLevel</strong>
     </dt>
     <dd>
-
-
-
+    The warning level of the battery.
+ This property is only valid if the device is a battery.
 
 
     <h3>Fields:</h3>
@@ -368,6 +369,61 @@ upower = <span class="global">require</span>(<span class="string">"upower_dbus"<
 
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="index.html#DeviceType">DeviceType</a>
+    </ul>
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Device"></a>Device</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "upower.create_device"></a>
+    <strong>upower.create_device (path)</strong>
+    </dt>
+    <dd>
+    Create a new <a href="https://upower.freedesktop.org/docs/Device.html">UPower
+  Device</a>. </p>
+
+<p>  Rather than creating devices manually, you should use the
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">path</span>
+         The DBus object path for the device.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Manager"></a>Manager</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "upower.Manager"></a>
+    <strong>upower.Manager</strong>
+    </dt>
+    <dd>
+    The UPower Manager that proxies the <a href="https://upower.freedesktop.org/docs/UPower.html">UPower DBus
+ interface</a>.
+ Additionally the <code>devices</code> field contains the available Device objects.
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="index.html#upower.create_device">upower.create_device</a>
+    </ul>
 
 
 </dd>
@@ -378,7 +434,7 @@ upower = <span class="global">require</span>(<span class="string">"upower_dbus"<
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2017-11-05 13:17:13 </i>
+<i style="float:right;">Last updated 2017-11-05 15:01:46 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

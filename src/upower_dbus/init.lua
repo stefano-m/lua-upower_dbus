@@ -47,50 +47,78 @@
 ]]
 
 local proxy = require("dbus_proxy")
+local enum = require("enum")
 
 local upower = {}
+
+--- UPower Enumerations.
+-- The `upower.enums` table contains the below [Lua
+-- Enumerations](https://luarocks.org/modules/stefano-m/enum).
+-- @within Enumerations
 upower.enums = {}
 
---- @table upower.enums.DeviceTypes
-upower.enums.DeviceTypes = {
-  "Unknown",
-  "Line Power",
-  "Battery",
-  "Ups",
-  "Monitor",
-  "Mouse",
-  "Keyboard",
-  "Pda",
-  "Phone"}
+--- The type of power source
+-- @within Enumerations
+-- @table DeviceType
+local DeviceType = {
+    "Unknown",
+    "Line Power",
+    "Battery",
+    "Ups",
+    "Monitor",
+    "Mouse",
+    "Keyboard",
+    "Pda",
+    "Phone"
+}
+upower.enums.DeviceType = enum.new("DeviceType", DeviceType)
 
---- @table upower.enums.BatteryStates
-upower.enums.BatteryStates = {
+--- The state of the battery.
+-- This property is only valid if the device is a battery.
+-- @within Enumerations
+-- @table BatteryState
+-- @see DeviceType
+local BatteryState =   {
   "Unknown",
   "Charging",
   "Discharging",
   "Empty",
   "Fully charged",
   "Pending charge",
-  "Pending discharge"}
+  "Pending discharge"
+}
+upower.enums.BatteryState = enum.new("BatteryState", BatteryState)
 
---- @table upower.enums.BatteryTechnologies
-upower.enums.BatteryTechnologies = {
+--- The technology used by the battery.
+-- This property is only valid if the device is a battery.
+-- @within Enumerations
+-- @table BatteryTechnology
+-- @see DeviceType
+local BatteryTechnology = {
   "Unknown",
   "Lithium ion",
   "Lithium polymer",
   "Lithium iron phosphate",
   "Lead acid",
   "Nickel cadmium",
-  "Nickel metal hydride"}
+  "Nickel metal hydride"
+}
+upower.enums.BatteryTechnology = enum.new("BatteryTechnology", BatteryTechnology)
 
---- @table upower.enums.BatteryWarningLevels
-upower.enums.BatteryWarningLevels = {
-  "Unknown",
-  "None",
-  "Discharging", -- (only for UPSes)
-  "Low",
-  "Critical",
-  "Action"}
+--- The warning level of the battery.
+-- This property is only valid if the device is a battery.
+-- @within Enumerations
+-- @table BatteryWarningLevel
+-- @see DeviceType
+local BatteryWarningLevel =  {
+    "Unknown",
+    "None",
+    "Discharging", -- (only for UPSes)
+    "Low",
+    "Critical",
+    "Action"
+  }
+upower.enums.BatteryWarningLevel = enum.new("BatteryWarningLevel", BatteryWarningLevel)
 
 local function update_mapping(obj, name, mapping)
   local value = obj[name]
@@ -108,24 +136,30 @@ local function update_mappings(device)
   update_mapping(
     device,
     "Type",
-    upower.enums.DeviceTypes)
+    upower.enums.DeviceType)
   update_mapping(
     device,
     "State",
-    upower.enums.BatteryStates)
+    upower.enums.BatteryState)
   update_mapping(
     device,
     "Technology",
-    upower.enums.BatteryTechnologies)
+    upower.enums.BatteryTechnology)
   update_mapping(
     device,
     "WarningLevel",
-    upower.enums.BatteryWarningLevels)
+    upower.enums.BatteryWarningLevel)
 end
 
 
---- Create a new Device
--- @param path The DBus object path for the device.
+--[[-- Create a new [UPower
+  Device](https://upower.freedesktop.org/docs/Device.html).
+
+  Rather than creating devices manually, you should use the
+
+  @param path The DBus object path for the device.
+  @within Device
+]]
 function upower.create_device(path)
   local device =  proxy.Proxy:new(
     {
@@ -140,6 +174,11 @@ function upower.create_device(path)
   return device
 end
 
+--- The UPower Manager that proxies the [UPower DBus
+-- interface](https://upower.freedesktop.org/docs/UPower.html).
+-- Additionally the `devices` field contains the available Device objects.
+-- @see upower.create_device
+-- @within Manager
 upower.Manager = proxy.Proxy:new(
   {
     bus = proxy.Bus.SYSTEM,
@@ -148,6 +187,7 @@ upower.Manager = proxy.Proxy:new(
     interface = "org.freedesktop.UPower"
   }
 )
+
 
 --- Initialize the Manager singleton
 local function init(mgr)
