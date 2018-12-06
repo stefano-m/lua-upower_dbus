@@ -18,13 +18,12 @@ Use the `--local` option in `luarocks` if you don't want or can't install it sys
 
 This module exposes the following
 
-* `Manager` singleton, containing its own properties and the `devices` array (after initialization).
+* `Manager` singleton, containing its own properties and the `devices` array.
 * `enums` table containing the UPower enumerations as arrays of strings.
 * `Device` constructor, although it's advised to use the Manager to get the devices rather then building them by hand.
 
 ```lua
 local upower = require("upower_dbus")
-upower.Manager:init()
 -- What version of UPower is in use?
 upower.Manager.DaemonVersion
 -- Are we using a battery?
