@@ -30,7 +30,7 @@
       -- Are we using a battery?
       upower.Manager.OnBattery
       -- Enumerate the Device Types known by UPower
-      for _, v in ipairs(upower.enums.DeviceTypes) do print(v) end
+      for _, v in ipairs(upower.enums.DeviceType) do print(v) end
       -- Say that the first device is a battery
       battery = upower.Manager.devices[1]
       print(battery.Percentage) -- may print 100.0
