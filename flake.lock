@@ -1,0 +1,70 @@
+{
+  "nodes": {
+    "dbusProxyFlake": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1639231766,
+        "narHash": "sha256-Bja/yxD6C/hux6he3qd7d8YrmEsBEreJv5avCkJRTwg=",
+        "owner": "stefano-m",
+        "repo": "lua-dbus_proxy",
+        "rev": "b9e9749708957c86b5660b78fff479cc86ee7682",
+        "type": "github"
+      },
+      "original": {
+        "owner": "stefano-m",
+        "ref": "nix-flake",
+        "repo": "lua-dbus_proxy",
+        "type": "github"
+      }
+    },
+    "enumFlake": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1639230291,
+        "narHash": "sha256-umL5+Qx+cwWv8mcfxFlP6OJX2LEiTh1J9c0riCn+UFQ=",
+        "owner": "stefano-m",
+        "repo": "lua-enum",
+        "rev": "10ba28a4e384f3777e250f9de3bd8a4d9fd10ef9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "stefano-m",
+        "repo": "lua-enum",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1639130158,
+        "narHash": "sha256-/5a/7J3AE5ATzB3HdFZ9C9VlPbUK5bIGsRX7veSujXA=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "3b422991781220853035dbe353ba8b7cb279b6b3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-21.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "dbusProxyFlake": "dbusProxyFlake",
+        "enumFlake": "enumFlake",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
