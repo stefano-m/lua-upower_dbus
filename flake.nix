@@ -13,15 +13,9 @@
 
   outputs = { self, nixpkgs, dbusProxyFlake, enumFlake }:
     let
-      flakePkgs = import nixpkgs {
-        system = "x86_64-linux";
-        overlays = [
-          self.overlay
-          enumFlake.overlay
-          dbusProxyFlake.overlay
-        ];
-      };
 
+      flakePkgs = import nixpkgs { overlays = [ self.overlay ]; inherit system; };
+      system = "x86_64-linux";
       currentVersion = builtins.readFile ./VERSION;
 
       buildPackage = luaPackages: with luaPackages;
@@ -70,44 +64,32 @@
     in
     {
 
-      packages.x86_64-linux = {
+      packages.${system} = {
         lua_upower_dbus = buildPackage flakePkgs.luaPackages;
         lua52_upower_dbus = buildPackage flakePkgs.lua52Packages;
         lua53_upower_dbus = buildPackage flakePkgs.lua53Packages;
-        luajit_upower_dbus = buildPackage flakePkgs.luajitPackages;
       };
 
-      defaultPackage.x86_64-linux = self.packages.x86_64-linux.lua_upower_dbus;
+      defaultPackage.${system} = self.packages.${system}.lua_upower_dbus;
 
-      devShell.x86_64-linux = flakePkgs.mkShell {
+      devShell.${system} = flakePkgs.mkShell {
         LUA_PATH = "./src/?.lua;./src/?/init.lua";
-        buildInputs = (with self.defaultPackage.x86_64-linux; buildInputs ++ propagatedBuildInputs) ++ (with flakePkgs; [
-          nixpkgs-fmt
-          luarocks
-        ]);
+        buildInputs = (with self.defaultPackage.${system};
+          buildInputs ++ propagatedBuildInputs) ++ (with flakePkgs;
+          [ nixpkgs-fmt luarocks ]);
       };
 
-      overlay = final: prev: with self.packages.x86_64-linux; {
-        # TODO: combine with, maybe with lib.extends?
-        # enumFlake.overlay
-        # dbusProxyFlake.overlay
-        luaPackages = prev.luaPackages // {
-          upower_dbus = lua_upower_dbus;
-        };
-
-        lua52Packages = prev.lua52Packages // {
-          upower_dbus = lua52_upower_dbus;
-        };
-
-        lua53Packages = prev.lua53Packages // {
-          upower_dbus = lua53_upower_dbus;
-        };
-
-        luajitPackages = prev.luajitPackages // {
-          upower_dbus = luajit_upower_dbus;
-        };
-
-      };
+      overlay = final: prev:
+        let
+          thisOverlay = this: previous: with self.packages.${system}; {
+            luaPackages = previous.luaPackages // { upower_dbus = lua_upower_dbus; };
+            lua52Packages = previous.lua52Packages // { upower_dbus = lua52_upower_dbus; };
+            lua53Packages = previous.lua53Packages // { upower_dbus = lua53_upower_dbus; };
+            luajitPackages = previous.luajitPackages // { upower_dbus = luajit_upower_dbus; };
+          };
+        in
+        # expose the other lua overlays together with this one.
+        (nixpkgs.lib.composeManyExtensions [ thisOverlay enumFlake.overlay dbusProxyFlake.overlay ]) final prev;
 
     };
 
