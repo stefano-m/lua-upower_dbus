@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.05";
     dbusProxyFlake = {
       url = "github:stefano-m/lua-dbus_proxy/nix-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -37,7 +37,7 @@
             ldoc
             luacheck
             flakePkgs.upower
-            flakePkgs.dbus_tools
+            flakePkgs.dbus
           ];
 
           buildPhase = ":";
