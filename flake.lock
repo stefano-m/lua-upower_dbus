@@ -7,16 +7,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1639231766,
-        "narHash": "sha256-Bja/yxD6C/hux6he3qd7d8YrmEsBEreJv5avCkJRTwg=",
+        "lastModified": 1659203930,
+        "narHash": "sha256-mf49sgSO3zkeDDyezSr9BmvX2Fah8Hc59eLREP5G+p4=",
         "owner": "stefano-m",
         "repo": "lua-dbus_proxy",
-        "rev": "b9e9749708957c86b5660b78fff479cc86ee7682",
+        "rev": "c9253bde3fa5a64261953d1b196c57fabf9f8561",
         "type": "github"
       },
       "original": {
         "owner": "stefano-m",
-        "ref": "nix-flake",
+        "ref": "master",
         "repo": "lua-dbus_proxy",
         "type": "github"
       }
@@ -28,11 +28,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1639230291,
-        "narHash": "sha256-umL5+Qx+cwWv8mcfxFlP6OJX2LEiTh1J9c0riCn+UFQ=",
+        "lastModified": 1659197944,
+        "narHash": "sha256-72hbj8LbirqE52trhk/P5SlOqp/gKzBRg5nwLvbBX7M=",
         "owner": "stefano-m",
         "repo": "lua-enum",
-        "rev": "10ba28a4e384f3777e250f9de3bd8a4d9fd10ef9",
+        "rev": "7bdc658ecaed43ea4ef021846912baedc237945d",
         "type": "github"
       },
       "original": {

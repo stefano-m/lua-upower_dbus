@@ -2,7 +2,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.05";
     dbusProxyFlake = {
-      url = "github:stefano-m/lua-dbus_proxy/nix-flake";
+      url = "github:stefano-m/lua-dbus_proxy/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     enumFlake = {
