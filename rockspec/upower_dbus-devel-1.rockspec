@@ -7,7 +7,7 @@ package = "upower_dbus"
  description = {
     summary = "Get power information with UPower and DBus",
     detailed = "Get power information with UPower and DBus",
-    homepage = "https://github.com/stefano-m/lua-upower_dbus",
+    homepage = "git+https://github.com/stefano-m/lua-upower_dbus",
     license = "Apache v2.0"
  }
  dependencies = {
