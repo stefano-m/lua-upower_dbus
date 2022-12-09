@@ -1,12 +1,12 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
     dbusProxyFlake = {
       url = "github:stefano-m/lua-dbus_proxy/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     enumFlake = {
-      url = "github:stefano-m/lua-enum";
+      url = "github:stefano-m/lua-enum/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -14,7 +14,7 @@
   outputs = { self, nixpkgs, dbusProxyFlake, enumFlake }:
     let
 
-      flakePkgs = import nixpkgs { overlays = [ self.overlay ]; inherit system; };
+      flakePkgs = import nixpkgs { overlays = [ self.overlays.default ]; inherit system; };
       system = "x86_64-linux";
       currentVersion = builtins.readFile ./VERSION;
 
@@ -64,22 +64,21 @@
     in
     {
 
-      packages.${system} = {
+      packages.${system} = rec {
+        default = lua_upower_dbus;
         lua_upower_dbus = buildPackage flakePkgs.luaPackages;
         lua52_upower_dbus = buildPackage flakePkgs.lua52Packages;
         lua53_upower_dbus = buildPackage flakePkgs.lua53Packages;
       };
 
-      defaultPackage.${system} = self.packages.${system}.lua_upower_dbus;
-
-      devShell.${system} = flakePkgs.mkShell {
+      devShells.${system}.default = flakePkgs.mkShell {
         LUA_PATH = "./src/?.lua;./src/?/init.lua";
-        buildInputs = (with self.defaultPackage.${system};
+        buildInputs = (with self.packages.${system}.default;
           buildInputs ++ propagatedBuildInputs) ++ (with flakePkgs;
           [ nixpkgs-fmt luarocks ]);
       };
 
-      overlay = final: prev:
+      overlays.default = final: prev:
         let
           thisOverlay = this: previous: with self.packages.${system}; {
             luaPackages = previous.luaPackages // { upower_dbus = lua_upower_dbus; };
@@ -89,7 +88,7 @@
           };
         in
         # expose the other lua overlays together with this one.
-        (nixpkgs.lib.composeManyExtensions [ thisOverlay enumFlake.overlay dbusProxyFlake.overlay ]) final prev;
+        (nixpkgs.lib.composeManyExtensions [ thisOverlay enumFlake.overlays.default dbusProxyFlake.overlays.default ]) final prev;
 
     };
 

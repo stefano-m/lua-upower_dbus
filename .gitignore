@@ -2,3 +2,4 @@
 luacov.*
 *.rock
 .direnv/
+result*

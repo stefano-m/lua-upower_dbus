@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1659203930,
-        "narHash": "sha256-mf49sgSO3zkeDDyezSr9BmvX2Fah8Hc59eLREP5G+p4=",
+        "lastModified": 1670591869,
+        "narHash": "sha256-tY0/7RvCtTMXNYubpxEuNd918f3kwKgb+mQK2bG0r1Q=",
         "owner": "stefano-m",
         "repo": "lua-dbus_proxy",
-        "rev": "c9253bde3fa5a64261953d1b196c57fabf9f8561",
+        "rev": "cf196564a0db5fb55c8913a7faafbe69f0b45fdf",
         "type": "github"
       },
       "original": {
@@ -28,31 +28,32 @@
         ]
       },
       "locked": {
-        "lastModified": 1659197944,
-        "narHash": "sha256-72hbj8LbirqE52trhk/P5SlOqp/gKzBRg5nwLvbBX7M=",
+        "lastModified": 1670589611,
+        "narHash": "sha256-UltTbaz4Sq2/YhggzaVA9xfcSNyibDqcG7RAvda3zoM=",
         "owner": "stefano-m",
         "repo": "lua-enum",
-        "rev": "7bdc658ecaed43ea4ef021846912baedc237945d",
+        "rev": "0756c5114ed716f0c286d78b3241c3795632e6a9",
         "type": "github"
       },
       "original": {
         "owner": "stefano-m",
+        "ref": "master",
         "repo": "lua-enum",
         "type": "github"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1659052185,
-        "narHash": "sha256-TUbwbzCbprtWB9EtXPM52cWuKETuCV3H+cMXjLRbwTw=",
+        "lastModified": 1670543317,
+        "narHash": "sha256-4mMR56rtxKr+Gwz399jFr4i76SQZxsLWxxyfQlPXRm0=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "9370544d849be8a07193e7611d02e6f6f1b10768",
+        "rev": "7a6a010c3a1d00f8470a5ca888f2f927f1860a19",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-22.05",
+        "ref": "nixos-22.11",
         "repo": "nixpkgs",
         "type": "github"
       }
