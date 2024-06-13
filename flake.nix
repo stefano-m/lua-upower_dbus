@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     dbusProxyFlake = {
       url = "github:stefano-m/lua-dbus_proxy/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -48,15 +48,14 @@
           '';
 
           doCheck = true;
+
+          GI_TYPELIB_PATH = "${flakePkgs.lib.getLib flakePkgs.glib}/lib/girepository-1.0/";
+          LUA_PATH = "$LUA_PATH;./src/?.lua;./src/?/init.lua";
+
           checkPhase = ''
             luacheck src
-            LUA_PATH="$LUA_PATH;./src/?.lua;./src/?/init.lua"
-            export LUA_PATH
             lua -v
-            lua -l "lgi"
-            lua -l "enum"
-            lua -l "dbus_proxy"
-            # lua -l "upower_dbus" # fails because it can't find upower
+            lua ${./tests/simple_test.lua}
           '';
 
         };
