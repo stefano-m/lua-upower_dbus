@@ -27,8 +27,10 @@
 <h1>upower_dbus</h1>
 
 
+
 <h2>Contents</h2>
 <ul>
+<li><a href="#Fields">Fields</a></li>
 <li><a href="#Enumerations">Enumerations</a></li>
 <li><a href="#Device">Device</a></li>
 <li><a href="#Manager">Manager</a></li>
@@ -61,32 +63,41 @@
 
 <pre>
 GLib = <span class="global">require</span>(<span class="string">"lgi"</span>).GLib
-ctx = GLib.MainLoop():get_context()
+ctx = GLib.<span class="function-name">MainLoop</span>():<span class="function-name">get_context</span>()
 upower = <span class="global">require</span>(<span class="string">"upower_dbus"</span>)
 <span class="comment">-- What version of UPower is in use?
 </span>upower.Manager.DaemonVersion
 <span class="comment">-- Are we using a battery?
-</span>upower.Manager.OnBattery
-<span class="comment">-- Enumerate the Device Types known by UPower
+</span>upower.Manager.OnBattery <span class="comment">-- true or false
+</span><span class="comment">-- Enumerate the Device Types known by UPower
 </span><span class="keyword">for</span> _, v <span class="keyword">in</span> <span class="global">ipairs</span>(upower.enums.DeviceType) <span class="keyword">do</span> <span class="global">print</span>(v) <span class="keyword">end</span>
 <span class="comment">-- Say that the first device is a battery
 </span>battery = upower.Manager.devices[<span class="number">1</span>]
 <span class="global">print</span>(battery.Percentage) <span class="comment">-- may print 100.0
 </span><span class="comment">-- Update the devices in case something changed
-</span>ctx:iteration()
+</span>ctx:<span class="function-name">iteration</span>()
 <span class="comment">-- The battery discharged a bit
-</span>battery.Percentage <span class="comment">-- may print 99.0</span>
+</span>battery.Percentage <span class="comment">-- may print 99.0
+</span>battery.WarningLevel <span class="comment">-- CamelCase, may print 4.0
+</span>battery.warninglevel <span class="comment">-- lower case, may print Critical</span>
 </pre>
 
 </p>
     <h3>Info:</h3>
     <ul>
-        <li><strong>Copyright</strong>: 2017 Stefano Mazzucco</li>
+        <li><strong>Copyright</strong>: 2017 - 2025 Stefano Mazzucco</li>
         <li><strong>License</strong>: Apache License, version 2.0</li>
         <li><strong>Author</strong>: Stefano Mazzucco <stefano AT curso DOT re></li>
     </ul>
 
 
+<h2><a href="#Fields">Fields</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#upower.display_device">upower.display_device</a></td>
+	<td class="summary">The display device.</td>
+	</tr>
+</table>
 <h2><a href="#Enumerations">Enumerations</a></h2>
 <table class="function_list">
 	<tr>
@@ -131,6 +142,28 @@ upower = <span class="global">require</span>(<span class="string">"upower_dbus"<
 <br/>
 
 
+    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "upower.display_device"></a>
+    <strong>upower.display_device</strong>
+    </dt>
+    <dd>
+    The display device. </p>
+
+<p>  The "display device" is a composite device that represents the status icon to
+  show in desktop environments. Its path is guaranteed to be
+  /org/freedesktop/UPower/devices/DisplayDevice.
+
+
+
+
+
+
+
+</dd>
+</dl>
     <h2 class="section-header "><a name="Enumerations"></a>Enumerations</h2>
 
     <dl class="function">
@@ -262,10 +295,6 @@ upower = <span class="global">require</span>(<span class="string">"upower_dbus"<
 
 
 
-    <h3>See also:</h3>
-    <ul>
-         <a href="index.html#DeviceType">DeviceType</a>
-    </ul>
 
 
 </dd>
@@ -319,10 +348,6 @@ upower = <span class="global">require</span>(<span class="string">"upower_dbus"<
 
 
 
-    <h3>See also:</h3>
-    <ul>
-         <a href="index.html#DeviceType">DeviceType</a>
-    </ul>
 
 
 </dd>
@@ -369,10 +394,6 @@ upower = <span class="global">require</span>(<span class="string">"upower_dbus"<
 
 
 
-    <h3>See also:</h3>
-    <ul>
-         <a href="index.html#DeviceType">DeviceType</a>
-    </ul>
 
 
 </dd>
@@ -385,10 +406,24 @@ upower = <span class="global">require</span>(<span class="string">"upower_dbus"<
     <strong>upower.create_device (path)</strong>
     </dt>
     <dd>
-    Create a new <a href="https://upower.freedesktop.org/docs/Device.html">UPower
+
+<p>Create a new <a href="https://upower.freedesktop.org/docs/Device.html">UPower
   Device</a>. </p>
 
-<p>  Rather than creating devices manually, you should use the
+<p>  You can use the EnumerateDevices method on the Manager object to obtain the
+  correct device paths. But the objects are also available from the
+  <code>Manager.devices</code> property.</p>
+
+<p>  The <code>Type</code>, <code>State</code>, <code>Technology</code> and <code>WarningLevel</code> uppercase numeric
+  properties have a lowercase string equivalent.</p>
+
+<p>  For example:</p>
+
+<pre><code>  device.Type -- numeric e.g. 2.0
+  device.type -- string e.g. "Battery"
+</code></pre>
+
+
 
 
     <h3>Parameters:</h3>
@@ -400,6 +435,11 @@ upower = <span class="global">require</span>(<span class="string">"upower_dbus"<
 
 
 
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="index.html#upower.enums">upower.enums</a></li>
+         <li><a href="index.html#upower.Manager">upower.Manager</a></li>
+    </ul>
 
 
 </dd>
@@ -433,8 +473,8 @@ upower = <span class="global">require</span>(<span class="string">"upower_dbus"<
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2019-11-10 12:16:57 </i>
+<i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 1980-01-01 00:00:00 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

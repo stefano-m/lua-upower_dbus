@@ -28,7 +28,7 @@
       -- What version of UPower is in use?
       upower.Manager.DaemonVersion
       -- Are we using a battery?
-      upower.Manager.OnBattery
+      upower.Manager.OnBattery -- true or false
       -- Enumerate the Device Types known by UPower
       for _, v in ipairs(upower.enums.DeviceType) do print(v) end
       -- Say that the first device is a battery
@@ -38,6 +38,8 @@
       ctx:iteration()
       -- The battery discharged a bit
       battery.Percentage -- may print 99.0
+      battery.WarningLevel -- CamelCase, may print 4.0
+      battery.warninglevel -- lower case, may print Critical
 
   @module upower_dbus
 
@@ -77,7 +79,6 @@ upower.enums.DeviceType = enum.new("DeviceType", DeviceType)
 -- This property is only valid if the device is a battery.
 -- @within Enumerations
 -- @table BatteryState
--- @see DeviceType
 local BatteryState =   {
   "Unknown",
   "Charging",
@@ -93,7 +94,6 @@ upower.enums.BatteryState = enum.new("BatteryState", BatteryState)
 -- This property is only valid if the device is a battery.
 -- @within Enumerations
 -- @table BatteryTechnology
--- @see DeviceType
 local BatteryTechnology = {
   "Unknown",
   "Lithium ion",
@@ -109,7 +109,6 @@ upower.enums.BatteryTechnology = enum.new("BatteryTechnology", BatteryTechnology
 -- This property is only valid if the device is a battery.
 -- @within Enumerations
 -- @table BatteryWarningLevel
--- @see DeviceType
 local BatteryWarningLevel =  {
     "Unknown",
     "None",
@@ -144,10 +143,22 @@ end
 --[[-- Create a new [UPower
   Device](https://upower.freedesktop.org/docs/Device.html).
 
-  Rather than creating devices manually, you should use the
+  You can use the EnumerateDevices method on the Manager object to obtain the
+  correct device paths. But the objects are also available from the
+  `Manager.devices` property.
+
+  The `Type`, `State`, `Technology` and `WarningLevel` uppercase numeric
+  properties have a lowercase string equivalent.
+
+  For example:
+
+      device.Type -- numeric e.g. 2.0
+      device.type -- string e.g. "Battery"
 
   @param path The DBus object path for the device.
   @within Device
+  @see upower.enums
+  @see upower.Manager
 ]]
 function upower.create_device(path)
   local device =  proxy.Proxy:new(
