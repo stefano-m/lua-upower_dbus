@@ -176,6 +176,15 @@ function upower.create_device(path)
   return device
 end
 
+--[[-- The display device.
+
+  The "display device" is a composite device that represents the status icon to
+  show in desktop environments. Its path is guaranteed to be
+  /org/freedesktop/UPower/devices/DisplayDevice.
+
+]]
+upower.display_device = upower.create_device("/org/freedesktop/UPower/devices/DisplayDevice")
+
 --- The UPower Manager that proxies the [UPower DBus
 -- interface](https://upower.freedesktop.org/docs/UPower.html).
 -- Additionally the `devices` field contains the available Device objects.
