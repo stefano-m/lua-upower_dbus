@@ -1,5 +1,5 @@
 --[[
-  Copyright 2017 Stefano Mazzucco
+  Copyright 2017 - 2025 Stefano Mazzucco
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@
 
   @license Apache License, version 2.0
   @author Stefano Mazzucco <stefano AT curso DOT re>
-  @copyright 2017 Stefano Mazzucco
+  @copyright 2017 - 2025 Stefano Mazzucco
 ]]
 
 local proxy = require("dbus_proxy")
@@ -120,35 +120,24 @@ local BatteryWarningLevel =  {
   }
 upower.enums.BatteryWarningLevel = enum.new("BatteryWarningLevel", BatteryWarningLevel)
 
-local function update_mapping(obj, name, mapping)
-  local value = obj[name]
-  obj[name:lower()] = mapping[value + 1]
+local Mappings = {
+  Type =  DeviceType,
+  State = BatteryState,
+  Technology = BatteryTechnology,
+  WarningLevel = BatteryWarningLevel,
+}
+
+local MappingsList = {}
+do
+  local i = 1
+  for k, _ in pairs(Mappings) do
+    MappingsList[i] = k
+    i = i + 1
+  end
 end
 
-
---- Update the device mappings.
--- Unless you are sure that the properties of the Device
--- have changed, you may want to use `update_properties`
--- or `refresh` instead.
--- @see upower.Device:update_properties
--- @see upower.Device:refresh
-local function update_mappings(device)
-  update_mapping(
-    device,
-    "Type",
-    upower.enums.DeviceType)
-  update_mapping(
-    device,
-    "State",
-    upower.enums.BatteryState)
-  update_mapping(
-    device,
-    "Technology",
-    upower.enums.BatteryTechnology)
-  update_mapping(
-    device,
-    "WarningLevel",
-    upower.enums.BatteryWarningLevel)
+local function update_mapping(obj, key)
+  rawset(obj, key:lower(), Mappings[key][obj[key] + 1])
 end
 
 
@@ -169,8 +158,21 @@ function upower.create_device(path)
       path = path
     }
   )
-  device.update_mappings = update_mappings
-  device:update_mappings()
+
+  for _, prop in ipairs(MappingsList)  do
+    update_mapping(device, prop)
+  end
+
+  device:on_properties_changed(
+    function(dvc, changed)
+      for _, prop in ipairs(MappingsList) do
+        if changed[prop] then
+          update_mapping(dvc, prop)
+        end
+      end
+    end
+  )
+
   return device
 end
 
