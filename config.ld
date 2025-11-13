@@ -1,3 +1,4 @@
+title = "Lua UPower DBus"
 project = "upower_dbus"
 format = "markdown"
 readme = "README.md"
