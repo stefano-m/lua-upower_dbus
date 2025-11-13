@@ -248,16 +248,51 @@ upower.Manager = proxy.Proxy:new(
   }
 )
 
+--[[-- Array of [UPower Device](https://upower.freedesktop.org/docs/Device.html) objects.
 
---- Initialize the Manager singleton
-local function init(mgr)
-  local devices = mgr:EnumerateDevices()
+  @see upower.create_device
+  @see upower.Manager:refresh_devices
+  @within Manager
+--]]
+upower.Manager.devices = {}
+
+--[[-- Refresh the list of devices `upower.Manager.devices`.
+
+  Normally you should not need to call this method as it's called the first
+  time the module is `require`d and whenever a device is added or removed.
+
+  @within Manager
+]]
+function upower.Manager:refresh_devices()
+  --[[
+    TODO
+
+    Use the DeviceAdded and DeviceRemoved signals to update automatically the
+    devices property
+
+    https://upower.freedesktop.org/docs/UPower.html
+  ]]
+  local devices = self:EnumerateDevices()
   for i, path in ipairs(devices) do
     devices[i] = upower.create_device(path)
   end
-  mgr.devices = devices
+  rawset(self, "devices", devices)
 end
 
-init(upower.Manager)
+upower.Manager:connect_signal(
+  function()
+    upower.Manager:refresh_devices()
+  end,
+  "DeviceAdded"
+)
+
+upower.Manager:connect_signal(
+  function()
+    upower.Manager:refresh_devices()
+  end,
+  "DeviceRemoved"
+)
+
+upower.Manager:refresh_devices()
 
 return upower

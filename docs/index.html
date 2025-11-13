@@ -141,6 +141,14 @@ upower = <span class="global">require</span>(<span class="string">"upower_dbus"<
 	<td class="summary">The UPower Manager that proxies the <a href="https://upower.freedesktop.org/docs/UPower.html">UPower DBus
  interface</a>.</td>
 	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#upower.Manager.devices">upower.Manager.devices</a></td>
+	<td class="summary">Array of <a href="https://upower.freedesktop.org/docs/Device.html">UPower Device</a> objects.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#upower.Manager:refresh_devices">upower.Manager:refresh_devices ()</a></td>
+	<td class="summary">Refresh the list of devices <a href="index.html#upower.Manager.devices">upower.Manager.devices</a>.</td>
+	</tr>
 </table>
 
 <br/>
@@ -612,7 +620,7 @@ upower = <span class="global">require</span>(<span class="string">"upower_dbus"<
     <dd>
     The UPower Manager that proxies the <a href="https://upower.freedesktop.org/docs/UPower.html">UPower DBus
  interface</a>.
- Additionally the <code>devices</code> field contains the available Device objects.
+ Additionally the <a href="index.html#upower.Manager.devices">devices</a> field contains the available Device objects.
 
 
 
@@ -622,6 +630,42 @@ upower = <span class="global">require</span>(<span class="string">"upower_dbus"<
     <ul>
          <a href="index.html#upower.create_device">upower.create_device</a>
     </ul>
+
+
+</dd>
+    <dt>
+    <a name = "upower.Manager.devices"></a>
+    <strong>upower.Manager.devices</strong>
+    </dt>
+    <dd>
+    Array of <a href="https://upower.freedesktop.org/docs/Device.html">UPower Device</a> objects.
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="index.html#upower.create_device">upower.create_device</a></li>
+         <li><a href="index.html#upower.Manager:refresh_devices">upower.Manager:refresh_devices</a></li>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "upower.Manager:refresh_devices"></a>
+    <strong>upower.Manager:refresh_devices ()</strong>
+    </dt>
+    <dd>
+    Refresh the list of devices <a href="index.html#upower.Manager.devices">upower.Manager.devices</a>. </p>
+
+<p>  Normally you should not need to call this method as it's called the first
+  time the module is <code>require</code>d and whenever a device is added or removed.
+
+
+
+
+
 
 
 </dd>
