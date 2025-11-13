@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     dbusProxyFlake = {
       url = "github:stefano-m/lua-dbus_proxy/master";
       inputs.nixpkgs.follows = "nixpkgs";
