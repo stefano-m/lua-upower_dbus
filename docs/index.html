@@ -120,6 +120,11 @@ upower = <span class="global">require</span>(<span class="string">"upower_dbus"<
 	<td class="name" nowrap><a href="#BatteryWarningLevel">BatteryWarningLevel</a></td>
 	<td class="summary">The warning level of the battery.</td>
 	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#BatteryLevel">BatteryLevel</a></td>
+	<td class="summary">The level of the battery for devices which do not report a percentage but
+ rather a coarse battery level.</td>
+	</tr>
 </table>
 <h2><a href="#Device">Device</a></h2>
 <table class="function_list">
@@ -234,6 +239,106 @@ upower = <span class="global">require</span>(<span class="string">"upower_dbus"<
 
         </li>
         <li><span class="parameter">Phone</span>
+
+
+
+        </li>
+        <li><span class="parameter">Media Player</span>
+
+
+
+        </li>
+        <li><span class="parameter">Tablet</span>
+
+
+
+        </li>
+        <li><span class="parameter">Computer</span>
+
+
+
+        </li>
+        <li><span class="parameter">Gaming Input</span>
+
+
+
+        </li>
+        <li><span class="parameter">Pen</span>
+
+
+
+        </li>
+        <li><span class="parameter">Touchpad</span>
+
+
+
+        </li>
+        <li><span class="parameter">Modem</span>
+
+
+
+        </li>
+        <li><span class="parameter">Network</span>
+
+
+
+        </li>
+        <li><span class="parameter">Headset</span>
+
+
+
+        </li>
+        <li><span class="parameter">Speakers</span>
+
+
+
+        </li>
+        <li><span class="parameter">Headphones</span>
+
+
+
+        </li>
+        <li><span class="parameter">Video</span>
+
+
+
+        </li>
+        <li><span class="parameter">Other Audio</span>
+
+
+
+        </li>
+        <li><span class="parameter">Remote Control</span>
+
+
+
+        </li>
+        <li><span class="parameter">Printer</span>
+
+
+
+        </li>
+        <li><span class="parameter">Scanner</span>
+
+
+
+        </li>
+        <li><span class="parameter">Camera</span>
+
+
+
+        </li>
+        <li><span class="parameter">Wearable</span>
+
+
+
+        </li>
+        <li><span class="parameter">Toy</span>
+
+
+
+        </li>
+        <li><span class="parameter">Bluetooth Generic</span>
 
 
 
@@ -386,6 +491,59 @@ upower = <span class="global">require</span>(<span class="string">"upower_dbus"<
 
         </li>
         <li><span class="parameter">Action</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "BatteryLevel"></a>
+    <strong>BatteryLevel</strong>
+    </dt>
+    <dd>
+    The level of the battery for devices which do not report a percentage but
+ rather a coarse battery level.  If the value is None, then the device does
+ not support coarse battery reporting, and the percentage should be used
+ instead.
+
+
+    <h3>Fields:</h3>
+    <ul>
+        <li><span class="parameter">Unknown</span>
+
+
+
+        </li>
+        <li><span class="parameter">None</span>
+        the battery does not use a coarse level of battery reporting
+        </li>
+        <li><span class="parameter">Low</span>
+
+
+
+        </li>
+        <li><span class="parameter">Critical</span>
+
+
+
+        </li>
+        <li><span class="parameter">Normal</span>
+
+
+
+        </li>
+        <li><span class="parameter">High</span>
+
+
+
+        </li>
+        <li><span class="parameter">Full</span>
 
 
 

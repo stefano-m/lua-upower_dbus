@@ -63,15 +63,35 @@ upower.enums = {}
 -- @within Enumerations
 -- @table DeviceType
 local DeviceType = {
-    "Unknown",
-    "Line Power",
-    "Battery",
-    "Ups",
-    "Monitor",
-    "Mouse",
-    "Keyboard",
-    "Pda",
-    "Phone"
+  "Unknown",
+  "Line Power",
+  "Battery",
+  "Ups",
+  "Monitor",
+  "Mouse",
+  "Keyboard",
+  "Pda",
+  "Phone",
+  "Media Player",
+  "Tablet",
+  "Computer",
+  "Gaming Input",
+  "Pen",
+  "Touchpad",
+  "Modem",
+  "Network",
+  "Headset",
+  "Speakers",
+  "Headphones",
+  "Video",
+  "Other Audio",
+  "Remote Control",
+  "Printer",
+  "Scanner",
+  "Camera",
+  "Wearable",
+  "Toy",
+  "Bluetooth Generic",
 }
 upower.enums.DeviceType = enum.new("DeviceType", DeviceType)
 
@@ -119,11 +139,29 @@ local BatteryWarningLevel =  {
   }
 upower.enums.BatteryWarningLevel = enum.new("BatteryWarningLevel", BatteryWarningLevel)
 
+--- The level of the battery for devices which do not report a percentage but
+--- rather a coarse battery level. If the value is None, then the device does
+--- not support coarse battery reporting, and the percentage should be used
+--- instead.
+-- @within Enumerations
+-- @table BatteryLevel
+local BatteryLevel = {
+  "Unknown",
+  "None",       -- the battery does not use a coarse level of battery reporting
+  "Low",
+  "Critical",
+  "Normal",
+  "High",
+  "Full",
+}
+upower.enums.BatteryLevel = enum.new("BatteryLevel", BatteryLevel)
+
 local Mappings = {
   Type =  DeviceType,
   State = BatteryState,
   Technology = BatteryTechnology,
   WarningLevel = BatteryWarningLevel,
+  BatteryLevel = BatteryLevel,
 }
 
 local MappingsList = {}
