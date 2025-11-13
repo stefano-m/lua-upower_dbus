@@ -73,7 +73,7 @@
 
       devShells.${system}.default = flakePkgs.mkShell {
         LUA_PATH = "./src/?.lua;./src/?/init.lua";
-        buildInputs = (with self.packages.${system}.default;
+        buildInputs = (with self.packages.${system}.lua53_upower_dbus;
           buildInputs ++ propagatedBuildInputs) ++ (with flakePkgs;
           [ nixpkgs-fmt luarocks ]);
       };
