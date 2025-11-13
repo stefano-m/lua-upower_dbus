@@ -3,3 +3,5 @@ luacov.*
 *.rock
 .direnv/
 result*
+RELEASE
+upower_dbus-devel-1.rockspec
