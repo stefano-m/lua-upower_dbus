@@ -1,0 +1,32 @@
+* Release v0.4.0
+
+Stefano Mazzucco (25):
+      Bump max dbus_proxy version to 0.10.0
+      Fix documentation, no need to initialize the manager
+      Add info about installing with NixOS to README
+      Update generated documentation with info about nix
+      Update rockspec to support dbus_proxy < 0.11
+      Add nix flake support
+      Refactor flake.nix expose all lua inputs' overlays
+      Nix flake: update to 22.05
+      Update flake.lock
+      Update nix flake to point to dbus proxy master branch
+      Use correct git+https url syntax in rockspec
+      nixpkgs: 22.05 -> 22.11
+      NixOS: 22.11 -> 24.05, fix and refactor tests
+      Update flake.lock
+      Update flake.lock
+      Add gobject-introspection to propagatedBuildInputs
+      [BREAKING] Automatically update enum mappings
+      Add display_device property to the global upower table
+      Update documentation
+      Update device enums
+      Add title tag to documentation
+      Refactor Manager.devices functionality
+      Slightly improve the simple test
+      Use Lua 5.3 in dev shell
+      Add Makefie and CHANGELOG, update .gitignore, VERSION
+
+James Reed (1):
+      Fix documented example
+
