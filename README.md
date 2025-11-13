@@ -37,8 +37,8 @@ This module exposes the following
 * `upower.create_device` factory to create `Device` objects, although it's
   advised to use the Manager's `devices` property rather then building them by
   hand.
-* `upower.display_device` representing the status to show in a desktop
-  environment.
+* `upower.display_device` representing [the status to show in a desktop
+  environment](https://upower.freedesktop.org/docs/UPower.html#UPower.GetDisplayDevice).
 
 ```lua
 GLib = require("lgi").GLib

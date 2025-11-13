@@ -225,7 +225,7 @@ function upower.create_device(path)
   return device
 end
 
---[[-- The display device.
+--[[-- The [display device](https://upower.freedesktop.org/docs/UPower.html#UPower.GetDisplayDevice).
 
   The "display device" is a composite device that represents the status icon to
   show in desktop environments. Its path is guaranteed to be
